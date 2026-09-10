@@ -1,6 +1,23 @@
 <h1>User Form</h1>
 
-<form action="/users" method="post" accept-charset="UTF-8">
+
+<div>
+  <%= form_with model: @user do |user_form| %>
+    <%= user_form.label :username, "Your Username:" %>
+    <%= user_form.text_field :username, value: "gamer" %>
+
+    <%= user_form.label :email, "Your Email:" %>
+    <%= user_form.email_field :email, placeholder: "example@example.com" %>
+
+    <%= user_form.label :password, "Your Password:" %>
+    <%= user_form.password_field :password %>
+    <br><br>
+    <%= user_form.submit "Your Submit" %>
+  <% end %>
+</div>
+
+<% if false %> <!-- multiline comment, with ruby logic. yes. this is how you do it. -->
+<form action="/users" method="post" accept-charset="UTF-8" data-turbo="false">
 
   <input
   type="hidden"
@@ -9,14 +26,16 @@
   >
 
   <label for="username">Username:</label>
-  <input type="text" id="username" name="username"><br><br>
+  <input type="text" id="username" name="user[username]" value="<%= @user&.username %>" autocomplete="off"><br><br>
 
   <label for="email">Email Address:</label>
-  <input type="email" id="email" name="email"><br><br>
+  <input type="email" id="email" name="user[email]" value="<%= @user&.email %>" autocomplete="off"><br><br>
+
 
   <label for="password">Password:</label>
-  <input type="password" id="password" name="password"><br><br>
+  <input type="password" id="password" name="user[password]" value="<%= @user&.password %>" autocomplete="off"><br><br>
 
   <input type="submit" value="Submit" name="commit">
 
 </form>
+<% end %>
