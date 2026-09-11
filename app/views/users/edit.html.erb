@@ -1,0 +1,21 @@
+<h1>Edit User Form</h1>
+
+<% if @user.errors.any? %>
+  <% @user.errors.full_messages.each do |message| %>
+    <div><%= message %></div>
+  <% end %>
+  <br><br>
+<% end %>
+
+<%= form_with model: @user do |user_form| %>
+  <%= user_form.label :username, "Your Username:" %>
+  <%= user_form.text_field :username, value: @user&.username %>
+
+  <%= user_form.label :email, "Your Email:" %>
+  <%= user_form.email_field :email %>
+
+  <%= user_form.label :password, "Your Password:" %>
+  <%= user_form.password_field :password, value: @user&.password %>
+  <br><br>
+  <%= user_form.submit "Your Submit" %>
+<% end %>
